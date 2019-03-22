@@ -1,7 +1,7 @@
 // template literals
-let name = "katie"
+let firstName = "katie"
 let hairColor = "brunette"
-let literalString =  `say hi to ${name}, she is a ${hairColor}`
+let literalString =  `say hi to ${firstName}, she is a ${hairColor}`
 console.log(literalString)
 
 // tagged templates
@@ -23,8 +23,8 @@ function buildHTML(tags, lines){
 
 const result = buildHTML`<li>${lines}</li>`
 console.log(result)
-// however, you can't plop an array in the DOM... so...
 
+// however, you can't plop an array in the DOM... so...
 function buildHTML2(tags, lines) {
     return function(element){
         const newHTML2 = lines.map(function(line){
@@ -34,6 +34,7 @@ function buildHTML2(tags, lines) {
         document.querySelector(element).innerHTML += finalHTML
     }
 }
+// you can also CALL A FUNCTION from WITHIN A TEMPLATE LITERAL! But, there are some wierd rules. see Rob's video...
  
 // FUNCTION updates: default and the rest operator...
 // default: allows you to pass in a 'default value' with an argument in the case it is NOT passed =========
@@ -145,6 +146,115 @@ console.log(myArray)
 
 
 // arrow function synax (ie ROCKET!)
+myArray.map((elem, i)=>{
+    console.log(elem)
+})
+// arrow function syntax is especially helpful for anonymous functions;
+// and it allows for the elimination of the wor "function"!
+
+// Object literals
+// 3 primary ways of making an object:
+let objX = new Object()
+//or
+let objY = Object.create(null)
+//or
+let objZ = {}
+// the above method is an object literal!
+
+// updates to the object literal: 
+let exObject = {
+    name: "katie",
+    career: "unknown",
+    language: "JS"
+}
+
+let name = exObject.name
+let career = exObject.career
+
+let newObject = {
+    // name: name,
+    // career: career
+    name,
+    career
+}
+// BUT!!! if the key and the value are the SAME, you can define them as such. SEE ABOVE!
+
+// DESTRUCTURING!
+const someJSON = {
+    vote_count: 541,
+    id: 4607,
+    video: false,
+    vote_avg: 5.9,
+    title: "Olaf's Frozen Adventure",
+    genre_ids: [
+        12,16,35,14,10751
+    ]
+}
+
+// const title = someJSON.title
+// const id = someJSON.id
+// const video = someJSON.video
+
+const { title, id, video } = someJSON;
+
+//this gives variable definitions AS THEY MAP to different proporties that match their name in someJSON
+//much faster than the several lines of code as required above!
+console.log(title, id, video)
+
+// const { title: movieTitle } = someJSON;
+// you can also change the variable names using destructuring, as seen above
+
+processData({
+    title,
+    id,
+    video
+})
+
+//but this is a SMALL jSON object... what happens when it gets really big!?
+
+function processData(data) {
+    const { title, id, video } = data
+    console.log(`${title} has an id of ${id} and has video ${video}`)
+    //so you can see here how you can set up a function to handle that data by using destructuring,
+    // and then doing something with said data!
+}
+
+function processData2({ title, id, video }){
+    console.log(`${title} has an id of ${id} and has video ${video}`)
+}
+// the above syntax takes out the need to declare variables at all, by passing a destructured
+// object as the arguments, JS will parse through those and assign them to variables as needed! 
+// (ie, MAPPING property names to varibale names)
+
+// what about destructuring nested objects?!
+const { genre_ids: {[0]: firstGenre, [1]: secondGenre} } = someJSON
+console.log(firstGenre)
+
+// we can also use destructing to use named params in a function (the order doesn't matter, but the 
+// names MUST BE THE SAME! otherwise it doesn't work!)
+function getArea({width, height}){
+    console.log(width * height)
+}
+
+getArea({width: 70, height: 30})
+
+// we can also destrcture arrays!
+const [first, second, third] = someJSON.genre_ids
+console.log(first)
+const [,,,fourth, fifth] = someJSON.genre_ids
+console.log(fourth)
+
+// using rest operator and destructuring together
+const [,two,...otherz] = someJSON.genre_ids
+console.log(otherz)
+
+// example of a most common use!
+function userProfile(userData){
+    const {name, address} = userData
+}
+
+function bestUserProfile({name, address}){
+
+}
 
 
-// object literals and destructuring
