@@ -61,5 +61,3 @@ const string = `Robert Bunch`
 for(let letter of string){
     console.log(letter)
 }
-
-console.log(array)
