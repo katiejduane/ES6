@@ -56,7 +56,52 @@ friend = null;
 // map, you can't force garbage collection and declare a key as 'null', it won't go anywhere unless 
 // you delete it explicitly
 
-let aWeakMap = new WeakMap();
 
-function updateUsers();
+// the SET constructor!
+// a set is very similar to an array except it's not an array, and so does not have the protoype 
+// methods. it can also hold any data type. the MAIN kicker here is that ALL ELEMENTS ARE UNIQUE. 
+// there cannot be more than one of anything! Sets ARE iterable (insertion order).
 
+let employeeId = new Set(['a12', 'e7', 'c2', 'a12'])
+console.log(employeeId) // returns ONLY 3 items because 'a12' can ONLY BE ENTERED ONCE!
+
+let employeeSet = new Set()
+
+employeeSet.add({
+    name: 'Jane',
+    position: 'CTO',
+    tenure: '12 years'
+})
+
+// SET methods--->
+//.size //like .length() in array
+//.clear() //empties the entire set
+//.delete //a particular element
+//.entries //like Map it returns an iterable, each element in the iterable is an array, [0]key = value
+//.forEach
+//.has //allows you to check for the presence of an element
+//.keys //to get every key
+//.values //to get every value!
+
+
+// WEAKSET vs SET
+// unlike regualr sets, WeakSet can only hold objects! the primary gain is garbage collection. 
+// uses weak references (not strong references); so if you eliminate the references to an object,
+// the object is also eliminated.
+// it is NOT iterable, it has no get method,a nd the size is always 0
+
+let harry = {
+    name: 'harry',
+    id: 12
+}
+
+let sherry = {
+    name: 'sherry',
+    id: 13
+}
+
+let employeeIds = new WeakSet()
+    employeeIds.add(harry);
+    employeeIds.add(sherry);
+
+    // helpful when yo uhave you objects you want to flag them as being a part of a group of data
