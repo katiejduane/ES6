@@ -43,7 +43,7 @@ for(let value of array){
     console.log(value)
 }
 
-// what's REALLY the differenc between these two?
+// what's REALLY the difference between these two?
 for (let key in array) {
     console.log(key)
     console.log(array[key])
@@ -55,9 +55,13 @@ for (let value of array) {
 
 // the difference is is that...
 // - FOR...IN iterates over the KEYS of the iterators
-// - FOR...OF iterators over the VALUES; no access to the keys
+// - FOR...OF iterates over the VALUES; no access to the keys
 
 const string = `Robert Bunch`
-for(let letter of string){
-    console.log(letter)
+for(let value of string){
+    console.log(value)
+}
+
+for(let key in string){
+    console.log(key)
 }
